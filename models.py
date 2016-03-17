@@ -1348,7 +1348,7 @@ class CustomField(models.Model):
         )
 
     def _choices_as_array(self):
-        from StringIO import StringIO
+        from io import StringIO
         valuebuffer = StringIO(self.list_values)
         choices = [[item.strip(), item.strip()] for item in valuebuffer.readlines()]
         valuebuffer.close()

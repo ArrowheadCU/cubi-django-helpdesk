@@ -454,7 +454,8 @@ def update_ticket(request, ticket_id, public=False):
     if request.FILES:
         import mimetypes, os
         for file in request.FILES.getlist('attachment'):
-            filename = file.name.encode('ascii', 'ignore')
+            filename = file.name.encode('ascii', 'ignore').decode('utf-8')      # filename coming through as byte which causes urllib.parse.splittype() to error out. Decoded to pass through as string
+            print('file:', file, 'filetype:', type(file), 'filename:',filename)
             a = Attachment(
                 followup=f,
                 filename=filename,

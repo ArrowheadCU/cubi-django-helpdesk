@@ -20,6 +20,9 @@ except ImportError:
 import logging
 logger = logging.getLogger('helpdesk')
 
+from easylogging import sendMail   #Workaround for email due to security restrictions
+
+
 from django.utils.encoding import smart_str
 
 def send_templated_mail(template_name, email_context, recipients, sender=None, bcc=None, fail_silently=False, files=None):
@@ -129,6 +132,23 @@ def send_templated_mail(template_name, email_context, recipients, sender=None, b
     elif type(recipients) != list:
         recipients = [recipients,]
 
+    #This logic is a temp workaround for email updates. Once django email server is set up use commented logic directly after sendMail function calls
+    for recipient in recipients:
+        if not files:
+            sendMail(   frm = sender
+                        ,to = recipient
+                        ,subject = subject_part.replace('\n', '').replace('\r', '')
+                        ,message = text_part)
+        else:
+            sendMail(   frm = sender
+                        ,to = recipient
+                        ,subject = subject_part.replace('\n', '').replace('\r', '')
+                        ,message = text_part
+                        ,attachment = files)
+    #print("\n\n\n\n\n Email shouldve sent with sendMail( frm = {0} ,to = {1}, subject = {2}, message = {3} ,attachment = {4})\n\n\n\n\n". format(sender, recipients, subject_part.replace('\n', '').replace('\r', ''), text_part, files))
+    #print("All function parameterstemplate_name, email_context, recipients, sender=None, bcc=None, fail_silently=False, files=None",'\n', template_name, '\n', email_context, '\n',  recipients,'\n', sender, '\n', bcc, '\n', fail_silently, '\n', files, '\n',)
+
+    '''This is original logic that can be reimplemented if we configure django email server
     msg = EmailMultiAlternatives(   subject_part.replace('\n', '').replace('\r', ''),
                                     text_part,
                                     sender,
@@ -136,6 +156,7 @@ def send_templated_mail(template_name, email_context, recipients, sender=None, b
                                     bcc=bcc)
     msg.attach_alternative(html_part, "text/html")
 
+    
     if files:
         for attachment in files:
             file_to_attach = attachment[1]
@@ -144,7 +165,7 @@ def send_templated_mail(template_name, email_context, recipients, sender=None, b
             file_to_attach.close()
 
     return msg.send(fail_silently)
-
+    '''
 
 def query_to_dict(results, descriptions):
     """
