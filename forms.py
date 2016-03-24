@@ -25,10 +25,16 @@ try:
     from django.utils import timezone
 except ImportError:
     from datetime import datetime as timezone
+from datetime import timedelta
 
 from helpdesk.lib import send_templated_mail, safe_template_context
 from helpdesk.models import Ticket, Queue, FollowUp, Attachment, IgnoreEmail, TicketCC, CustomField, TicketCustomFieldValue, TicketDependency
 from helpdesk import settings as helpdesk_settings
+
+
+class DateTimeInput(forms.DateTimeInput):
+    input_type = 'date'
+
 
 class CustomFieldMixin(object):
     """
@@ -171,7 +177,8 @@ class TicketForm(CustomFieldMixin, forms.Form):
         )
 
     due_date = forms.DateTimeField(
-        widget=extras.SelectDateWidget,
+        #widget=extras.SelectDateWidget,
+        widget = DateTimeInput(),
         required=False,
         label=_('Due on'),
         )
@@ -362,11 +369,18 @@ class PublicTicketForm(CustomFieldMixin, forms.Form):
         )
 
     due_date = forms.DateTimeField(
-        widget=extras.SelectDateWidget,
+        #widget=extras.SelectDateWidget,
+        widget = DateTimeInput(),
         required=False,
         label=_('Due on'),
         )
-
+    
+    def clean_due_date(self):
+        date = self.cleaned_data['due_date']
+        if date < timezone.now() + timedelta(days = 13):
+            raise forms.ValidationError("Please provide alternate date no earlier than {0}".format(timezone.now() + timedelta(days = 14)))
+        return date
+    
     attachment = forms.FileField(
         required=False,
         label=_('Attach File'),
