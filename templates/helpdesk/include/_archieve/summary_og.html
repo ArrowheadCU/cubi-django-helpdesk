@@ -1,15 +1,6 @@
 {% load i18n %}
-
-<!-- Add collapse functionality from bootstrap js library -->
-<a class="btn btn-primary" style = "width:100%; font-weight:bold;" role="button" data-toggle="collapse" href="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary">
-
-{% trans "Helpdesk Summary" %}
-
-</a>
-
-<div class="collapse in" id="collapseSummary">
-
 <table class="table table-hover table-bordered table-striped">
+<caption>{% trans "Helpdesk Summary" %}</caption>
 <thead>
 <tr><th>{% trans "Queue" %}</th><th>{% trans "Open" %}</th><th>{% trans "Resolved" %}</th><th>{% trans "Closed" %}</th></tr>
 </thead>
@@ -24,5 +15,3 @@
 {% endfor %}
 </tbody>
 </table>
-
-</div>
