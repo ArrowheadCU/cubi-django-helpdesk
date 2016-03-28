@@ -11,8 +11,12 @@
 {% include 'helpdesk/include/summary.html' %}
 &nbsp
 
+{% comment "General stats link removed for UI" %}
 {% include 'helpdesk/include/stats.html' %}
 &nbsp
+{% endcomment %}
+
+{% comment "All tickets submitted link removed for UI %}
 
 {% if all_tickets_reported_by_current_user %}
 {% trans "All Tickets you've submitted" as ticket_list_caption %}
@@ -21,6 +25,8 @@
 {% include 'helpdesk/include/tickets.html' with ticket_list=all_tickets_reported_by_current_user ticket_list_empty_message="" %}
 {% endif %}
 &nbsp
+{% endcomment %}
+
 
 {% trans "Your Open Tickets" as ticket_list_caption %}
 {% trans "You have no tickets assigned to you." as no_assigned_tickets %}

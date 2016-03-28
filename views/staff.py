@@ -1025,10 +1025,27 @@ rss_list = staff_member_required(rss_list)
 def report_index(request):
     number_tickets = Ticket.objects.all().count()
     saved_query = request.GET.get('saved_query', None)
+
+    #General Ticket stats moved from dashboard
+    # all tickets, reported by current user
+    user_queues = _get_user_queues(request.user)
+    all_tickets_reported_by_current_user = ''
+    email_current_user = request.user.email
+    if email_current_user:
+        all_tickets_reported_by_current_user = Ticket.objects.select_related('queue').filter(
+            submitter_email=email_current_user,
+        ).order_by('status')
+
+    Tickets = Ticket.objects.filter(
+                queue__in=user_queues,
+            )
+    basic_ticket_stats = calc_basic_ticket_stats(Tickets)
+    
     return render_to_response('helpdesk/report_index.html',
         RequestContext(request, {
             'number_tickets': number_tickets,
             'saved_query': saved_query,
+            'basic_ticket_stats': basic_ticket_stats,
         }))
 report_index = staff_member_required(report_index)
 
