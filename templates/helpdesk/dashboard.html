@@ -9,11 +9,11 @@
 
 
 {% include 'helpdesk/include/summary.html' %}
-&nbsp
+
 
 {% comment "General stats link removed for UI" %}
 {% include 'helpdesk/include/stats.html' %}
-&nbsp
+
 {% endcomment %}
 
 {% comment "All tickets submitted link removed for UI %}
@@ -24,7 +24,7 @@
 {% trans "one" as caption_number %}
 {% include 'helpdesk/include/tickets.html' with ticket_list=all_tickets_reported_by_current_user ticket_list_empty_message="" %}
 {% endif %}
-&nbsp
+<br>
 {% endcomment %}
 
 
@@ -33,10 +33,10 @@
 <!-- Create a variable for use in collapse js call. This allows us to have unique targets -->
 {% trans "two" as caption_number %} 
 {% include 'helpdesk/include/tickets.html' with ticket_list=user_tickets ticket_list_empty_message=no_assigned_tickets %}
-&nbsp
+
 
 {% include 'helpdesk/include/unassigned.html' %}
-&nbsp
+
 
 {% if user_tickets_closed_resolved %}
 {% trans "Your Closed & Resolved Tickets" as ticket_list_caption %}

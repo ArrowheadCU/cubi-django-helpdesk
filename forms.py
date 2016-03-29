@@ -34,6 +34,7 @@ from helpdesk import settings as helpdesk_settings
 
 class DateTimeInput(forms.DateTimeInput):
     input_type = 'date'
+    add_class = 'datepicker'
 
 
 class CustomFieldMixin(object):

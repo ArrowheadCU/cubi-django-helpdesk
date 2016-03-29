@@ -3,6 +3,9 @@
 
 {% block helpdesk_body %}
 
+<br>
+
+{% comment "Remove Knowlegbase Articles for UI clarity" %}
 {% if kb_categories %}
 <h2>{% trans "Knowledgebase Articles" %}</h2>
 
@@ -19,6 +22,8 @@
 </tbody>
 </table>
 {% endif %}
+
+{% endcomment %}
 
 {% if helpdesk_settings.HELPDESK_SUBMIT_A_TICKET_PUBLIC %}
 <div class="col-xs-6">

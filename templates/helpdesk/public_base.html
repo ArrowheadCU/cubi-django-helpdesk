@@ -9,8 +9,15 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
 <link rel='stylesheet' href='{% static "helpdesk/helpdesk-extend.css" %}' type='text/css' />
+
+	<!-- Javascript for datepicker to resolve IE and FF non-HTML 5 support of input_type = 'date' --> 
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	  <script src='{% static "helpdesk/custom.js" %}' type='text/javascript' language='javascript'></script>
 {% block helpdesk_head %}{% endblock %}
 </head>
+
 <body id="helpdesk-body">
 <div id='container' class="container">
     <div id='header' class="row">

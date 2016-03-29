@@ -42,7 +42,15 @@
         /* query entries */
         #dropdown li.headerlink:hover ul { display: block; width: auto; }
         #dropdown li.headerlink:hover ul li { padding: 5px; margin: 1px; float: none; display: block; }
-        </style>
+        
+	   </style>
+  
+	<!-- Javascript for datepicker to resolve IE and FF non-HTML 5 support of input_type = 'date' --> 
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	  <!--<link href="css/jquery.datepicker.css" rel="stylesheet"> -->
+	  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	  <script src='{% static "helpdesk/custom.js" %}' type='text/javascript' language='javascript'></script>
 
         {% block helpdesk_head %}{% endblock %}
     </head>
