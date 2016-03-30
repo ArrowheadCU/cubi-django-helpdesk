@@ -69,7 +69,8 @@ $(document).ready(function() {
         <option value='Queue'>{% trans "Queue" %}</option>
         <option value='Status'>{% trans "Status" %}</option>
         <option value='Keywords'>{% trans "Keywords" %}</option>
-        <option value='Dates'>{% trans "Date Range" %}</option>
+        <option value='CreatedDates'>{% trans "Created On" %}</option>
+	   <option value='DueDates'>{% trans "Due On" %}</option>
         </select>
         <input type='button' id='filterBuilderButton' value='+' />
     {% csrf_token %}</form>
@@ -96,7 +97,11 @@ $(document).ready(function() {
         <option value='assigned_to'{% ifequal query_params.sorting "assigned_to"%} selected='selected'{% endifequal %}>
             {% trans "Owner" %}
         </option>
+ 	  <option value='due_date'{% ifequal query_params.sorting "due_date"%} selected='selected'{% endifequal %}>
+            {% trans "Due Date" %}
+        </option>
     </select>
+
     <label for='id_sortreverse'>{% trans "Reverse" %}</label>
     <input type='checkbox' name='sortreverse' id='id_sortreverse'{% if query_params.sortreverse %} checked='checked'{% endif %} />
     <p class='filterHelp'>{% trans "Ordering applied to tickets" %}</p>
@@ -128,12 +133,20 @@ $(document).ready(function() {
     <input type='button' class='filterBuilderRemove' value='-' />
     </div>
 
-    <div class='thumbnail filterBox{% if query_params.filtering.created__gte or query_params.filtering.created__lte %} filterBoxShow{% endif %}' id='filterBoxDates'>
-        <label for='id_date_from'>{% trans "Date (From)" %}</label><input type='text' name='date_from' value='{{ query_params.filtering.created__gte }}' id='id_date_from' />
-        <label for='id_date_to'>{% trans "Date (To)" %}</label><input type='text' name='date_to' value='{{ query_params.filtering.created__lte }}' id='id_date_to' />
-    <p class='filterHelp'>{% trans "Use YYYY-MM-DD date format, eg 2011-05-29" %}</p>
+    <div class='thumbnail filterBox{% if query_params.filtering.created__gte or query_params.filtering.created__lte %} filterBoxShow{% endif %}' id='filterBoxCreatedDates'>
+        <label for='id_date_from'>{% trans "Created (From)" %}</label><input type='date' name='date_from' value='{{ query_params.filtering.created__gte }}' id='id_date_from' />
+        <label for='id_date_to'>{% trans "Created (To)" %}</label><input type='date' name='date_to' value='{{ query_params.filtering.created__lte }}' id='id_date_to' />
+    <p class='filterHelp'>{% trans "Use YYYY-MM-DD date format, eg 1949-01-01" %}</p>
     <input type='button' class='filterBuilderRemove' value='-' />
     </div>
+
+    <div class='thumbnail filterBox{% if query_params.filtering.due_date__gte or query_params.filtering.due_date__lte %} filterBoxShow{% endif %}' id='filterBoxDueDates'>
+        <label for='id_due_from'>{% trans "Due (From)" %}</label><input type='date' name='due_from' value='{{ query_params.filtering.due_date__gte }}' id='id_due_from' />
+        <label for='id_due_to'>{% trans "Due (To)" %}</label><input type='date' name='due_to' value='{{ query_params.filtering.due_date__lte }}' id='id_due_to' />
+    <p class='filterHelp'>{% trans "Use YYYY-MM-DD date format, eg 1949-01-01" %}</p>
+    <input type='button' class='filterBuilderRemove' value='-' />
+    </div>
+
 
     <div class='thumbnail filterBox{% if query %} filterBoxShow{% endif %}' id='filterBoxKeywords'>
     <label for='id_query'>{% trans "Keywords" %}</label><input type='text' name='q' value='{{ query }}' id='id_query' />
@@ -222,7 +235,7 @@ $(document).ready(function() {
 <table class="table table-hover table-bordered table-striped">
 <caption>{% trans "Tickets" %}</caption>
 <thead>
-<tr><th>#</th><th>&nbsp;</th><th>{% trans "Pr" %}</th><th>{% trans "Title" %}</th><th>{% trans "Queue" %}</th><th>{% trans "Status" %}</th><th>{% trans "Created" %}</th><th>{% trans "Owner" %}</th></tr>
+<tr><th>#</th><th>&nbsp;</th><th>{% trans "Pr" %}</th><th>{% trans "Title" %}</th><th>{% trans "Queue" %}</th><th>{% trans "Status" %}</th><th>{% trans "Created" %}</th><th>{% trans "Owner" %}</th><th>{% trans "Due Date" %}</th></tr>
 </thead>
 <tbody>
 {% for ticket in tickets.object_list %}
@@ -235,6 +248,7 @@ $(document).ready(function() {
 <td>{{ ticket.get_status }}</td>
 <td><span title='{{ ticket.created|date:"r" }}'>{{ ticket.created|naturaltime }}</span></td>
 <td>{{ ticket.get_assigned_to }}</td>
+<td>{{ ticket.due_date|date  }} </td>
 </tr>
 {% empty %}
 <tr><td colspan='5'>{% trans "No Tickets Match Your Selection" %}</td></tr>

@@ -818,6 +818,7 @@ def ticket_list(request):
             except ValueError:
                 pass
 
+        #Created on query param for filter option
         date_from = request.GET.get('date_from')
         if date_from:
             query_params['filtering']['created__gte'] = date_from
@@ -825,6 +826,17 @@ def ticket_list(request):
         date_to = request.GET.get('date_to')
         if date_to:
             query_params['filtering']['created__lte'] = date_to
+
+        # Due on query param for filter option
+        due_from = request.GET.get('due_from')
+        if due_from:
+            query_params['filtering']['due_date__gte'] = due_from
+
+        due_to = request.GET.get('due_to')
+        if due_to:
+            query_params['filtering']['due_date__lte'] = due_to
+
+        print(query_params)
 
         ### KEYWORD SEARCHING
         q = request.GET.get('q', None)
@@ -842,7 +854,7 @@ def ticket_list(request):
 
         ### SORTING
         sort = request.GET.get('sort', None)
-        if sort not in ('status', 'assigned_to', 'created', 'title', 'queue', 'priority'):
+        if sort not in ('status', 'assigned_to', 'created', 'title', 'queue', 'priority', 'due_date' ):
             sort = 'created'
         query_params['sorting'] = sort
 
