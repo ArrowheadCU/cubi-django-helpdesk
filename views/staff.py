@@ -455,7 +455,6 @@ def update_ticket(request, ticket_id, public=False):
         import mimetypes, os
         for file in request.FILES.getlist('attachment'):
             filename = file.name.encode('ascii', 'ignore').decode('utf-8')      # filename coming through as byte which causes urllib.parse.splittype() to error out. Decoded to pass through as string
-            print('file:', file, 'filetype:', type(file), 'filename:',filename)
             a = Attachment(
                 followup=f,
                 filename=filename,
@@ -836,7 +835,6 @@ def ticket_list(request):
         if due_to:
             query_params['filtering']['due_date__lte'] = due_to
 
-        print(query_params)
 
         ### KEYWORD SEARCHING
         q = request.GET.get('q', None)

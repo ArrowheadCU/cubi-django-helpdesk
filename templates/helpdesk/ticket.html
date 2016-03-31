@@ -1,6 +1,7 @@
 {% extends "helpdesk/base.html" %}
 {% load i18n bootstrap humanize %}
 {% load static from staticfiles %}
+{% load url_target_blank %}
 {% block helpdesk_title %}{% trans "View Ticket Details" %}{% endblock %}
 {% block helpdesk_head %}
 <script type="text/javascript">
@@ -112,7 +113,7 @@ function googleTranslateElementInit() {
         {% endif %}
     </div>
 {% endif %}
-<span class='followup-desc'>{% if followup.comment %}{{ followup.comment|force_escape|urlizetrunc:50|num_to_link|linebreaksbr }}{% endif %}</span>
+<span class='followup-desc'>{% if followup.comment %}{{ followup.comment|force_escape|urlizetrunc:50|num_to_link|url_target_blank|linebreaksbr }}{% endif %}</span>
 {% for change in followup.ticketchange_set.all %}
 {% if forloop.first %}<div class='changes'><ul>{% endif %}
 <li>{% blocktrans with change.field as field and change.old_value as old_value and change.new_value as new_value %}Changed {{ field }} from {{ old_value }} to {{ new_value }}.{% endblocktrans %}</li>

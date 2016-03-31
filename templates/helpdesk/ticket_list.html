@@ -98,7 +98,7 @@ $(document).ready(function() {
             {% trans "Owner" %}
         </option>
  	  <option value='due_date'{% ifequal query_params.sorting "due_date"%} selected='selected'{% endifequal %}>
-            {% trans "Due Date" %}
+            {% trans "Due" %}
         </option>
     </select>
 
@@ -235,7 +235,7 @@ $(document).ready(function() {
 <table class="table table-hover table-bordered table-striped">
 <caption>{% trans "Tickets" %}</caption>
 <thead>
-<tr><th>#</th><th>&nbsp;</th><th>{% trans "Pr" %}</th><th>{% trans "Title" %}</th><th>{% trans "Queue" %}</th><th>{% trans "Status" %}</th><th>{% trans "Created" %}</th><th>{% trans "Owner" %}</th><th>{% trans "Due Date" %}</th></tr>
+<tr><th>#</th><th>&nbsp;</th><th>{% trans "Pr" %}</th><th>{% trans "Title" %}</th><th>{% trans "Queue" %}</th><th>{% trans "Status" %}</th><th>{% trans "Created" %}</th><th>{% trans "Owner" %}</th><th>{% trans "Due" %}</th></tr>
 </thead>
 <tbody>
 {% for ticket in tickets.object_list %}
