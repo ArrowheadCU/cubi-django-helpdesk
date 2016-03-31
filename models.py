@@ -240,7 +240,8 @@ class Queue(models.Model):
         if not self.email_address:
             return u'NO QUEUE EMAIL ADDRESS DEFINED <%s>' % settings.DEFAULT_FROM_EMAIL
         else:
-            return u'%s <%s>' % (self.title, self.email_address)
+            #return u'%s <%s>' % (self.title, self.email_address)
+            return u'%s <%s>' % ('CUBI', self.email_address)   #Send email display as BI, we may need to change for clarification
     from_address = property(_from_address)
 
     def prepare_permission_name(self):
