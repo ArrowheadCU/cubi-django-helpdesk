@@ -1,7 +1,7 @@
 {% load i18n humanize %}
 
 <!-- Add collapse functionality from bootstrap js library -->
-<a class="btn btn-primary" style = "width:100%; font-weight:bold;" role="button" data-toggle="collapse" href="#collapseTicket{{ caption_number }}" aria-expanded="false" aria-controls="collapseTicket{{ caption_number }}">
+<a class="btn btn-primary helpdesk-collapser no-border" style = "width:100%; font-weight:bold;" role="button" data-toggle="collapse" href="#collapseTicket{{ caption_number }}" aria-expanded="false" aria-controls="collapseTicket{{ caption_number }}">
 
 {% if ticket_list_caption %}
 {{ ticket_list_caption }}
@@ -10,7 +10,7 @@
 </a>
 <div class="collapse" id="collapseTicket{{caption_number}}">
 
-<table class="table table-hover table-bordered table-striped">
+<table class="table table-hover table-condensed table-striped">
 <thead>
 <tr><th>#</th><th>{% trans "Pr" %}</th><th>{% trans "Title" %}</th><th>{% trans "Queue" %}</th><th>{% trans "Status" %}</th><th>{% trans "Last Update" %}</th><th>{% trans "Due" %}</th></tr>
 </thead>

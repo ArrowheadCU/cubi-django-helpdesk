@@ -53,14 +53,14 @@ $(document).ready(function() {
 
 <div class="panel-group filter-options" id="accordion">
     <div id='tabfilter' class="panel panel-default">
-    <div class="panel-heading">
+    <!--<div class="panel-heading">-->
     <h3 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <a class= "btn btn-primary  helpdesk-collapser" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
         {% trans "Change Query" %}
         </a>
     </h3>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
+    <!--</div>-->
+    <div id="collapseOne" class="panel-collapse collapse">
       <div class="panel-body">
     <form>
         <select name='select' id='filterBuilderSelect'>
@@ -154,7 +154,7 @@ $(document).ready(function() {
     <input type='button' class='filterBuilderRemove' value='-' />
     </div>
     <hr style='clear: both;' />
-    <input class="btn btn-primary" type='submit' value='{% trans "Apply Filter" %}' />
+    <input class="btn btn-primary helpdesk-button" type='submit' value='{% trans "Apply Filter" %}' />
     {% if from_saved_query and saved_query.user == user %}
     <p>{% blocktrans with saved_query.title as query_name %}You are currently viewing saved query <strong>"{{ query_name }}"</strong>.{% endblocktrans %} <a href='{% url 'helpdesk_delete_query' saved_query.id %}'>{% trans "Delete Saved Query" %}</a></p>
     {% endif %}
@@ -169,12 +169,12 @@ $(document).ready(function() {
 
     {% if not from_saved_query %}
     <div class='panel panel-default' id='tabsave'>
-    <div class="panel-heading">
+    <!--<div class="panel-heading">-->
     <h3 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+        <a class="btn btn-primary helpdesk-collapser" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
         {% trans "Save Query" %}</a>
     </h3>
-    </div>
+    <!--</div>-->
     <div id="collapseTwo" class="panel-collapse collapse">
       <div class="panel-body">
     <form method='post' action='{% url 'helpdesk_savequery' %}'>
@@ -191,7 +191,7 @@ $(document).ready(function() {
     </dl>
 
     <div class='buttons'>
-        <input class="btn btn-primary" type='submit' value='{% trans "Save Query" %}'>
+        <input class="btn btn-primary helpdesk-button" type='submit' value='{% trans "Save Query" %}'>
     </div>
 
     {% csrf_token %}</form>
@@ -202,13 +202,13 @@ $(document).ready(function() {
 
 
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <!-- <div class="panel-heading helpdesk-panel-heading"> -->
       <h3 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          <a class="btn btn-primary helpdesk-collapser"  data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
           {% trans "Use Saved Query" %}
           </a>
       </h3>
-    </div>
+    <!--</div>-->
     <div id="collapseThree" class="panel-collapse collapse">
       <div class="panel-body">
     <form method='get' action='{% url 'helpdesk_list' %}'>
@@ -217,7 +217,7 @@ $(document).ready(function() {
         <option value='{{ q.id }}'>{{ q.title }}{% if q.shared %} (Shared{% ifnotequal user q.user %} by {{ q.user.get_username }}{% endifnotequal %}){% endif %}</option>
         {% endfor %}
     </select></p>
-    <input class="btn btn-primary" type='submit' value='{% trans "Run Query" %}'>
+    <input class="btn btn-primary helpdesk-button" type='submit' value='{% trans "Run Query" %}'>
     {% csrf_token %}</form>
     </div>
     </div>
@@ -232,8 +232,14 @@ $(document).ready(function() {
 
 {{ search_message|safe }}
 <form method='post' action='{% url 'helpdesk_mass_update' %}' id="ticket_mass_update">
-<table class="table table-hover table-bordered table-striped">
-<caption>{% trans "Tickets" %}</caption>
+
+<a class="btn btn-success helpdesk-collapser" role="button" data-toggle="collapse" href="#collapseTickets" aria-expanded="false" aria-controls="collapseTickets">
+{% trans "Tickets" %}</a>
+</a>
+
+<div class="collapse in" id="collapseTickets">
+
+<table class="table table-hover table-condensed table-striped">
 <thead>
 <tr><th>#</th><th>&nbsp;</th><th>{% trans "Pr" %}</th><th>{% trans "Title" %}</th><th>{% trans "Queue" %}</th><th>{% trans "Status" %}</th><th>{% trans "Created" %}</th><th>{% trans "Owner" %}</th><th>{% trans "Due" %}</th></tr>
 </thead>
@@ -276,4 +282,6 @@ $(document).ready(function() {
 <p><label for='id_mass_action'>{% trans "With Selected Tickets:" %}</label> <select name='action' id='id_mass_action'><option value='take'>{% trans "Take (Assign to me)" %}</option><option value='delete'>{% trans "Delete" %}</option><optgroup label='{% trans "Close" %}'><option value='close'>{% trans "Close (Don't Send E-Mail)" %}</option><option value='close_public'>{% trans "Close (Send E-Mail)" %}</option></optgroup><optgroup label='{% trans "Assign To" %}'><option value='unassign'>{% trans "Nobody (Unassign)" %}</option>{% for u in user_choices %}<option value='assign_{{ u.id }}'>{{ u.get_username }}</option>{% endfor %}</optgroup></select> <input type='submit' value='Go' /></p>
 {% csrf_token %}</form>
 {% endblock %}
+</div>
+
 </div>

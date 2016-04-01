@@ -3,16 +3,22 @@
 {% block helpdesk_title %}{% trans "View a Ticket" %}{% endblock %}
 
 {% block helpdesk_body %}
+<br>
+
+<div class="panel panel-info helpdesk">
+
+<div class="panel-heading helpdesk">
+<h3>{{ ticket.ticket }} . {{ ticket.title }} [{{ ticket.get_status }}]<h3>
+</div>
 
 <table class="table table-hover table-bordered table-striped">
-<caption>{{ ticket.ticket }} . {{ ticket.title }} [{{ ticket.get_status }}]</caption>
 <thead>
 <tr><th colspan='2'>{% blocktrans with ticket.queue as queue_name %}Queue: {{ queue_name }}{% endblocktrans %}</th></tr>
 </thead>
 <tbody>
 <tr>
     <th>{% trans "Submitted On" %}</th>
-    <td>{{ ticket.created|date:"r" }} ({{ ticket.created|naturaltime }})</td>
+    <td>{{ ticket.created|date }} {{ ticket.created|time }} ({{ ticket.created|naturaltime }})</td>
 </tr>
 
 <tr>
@@ -42,7 +48,7 @@
     <th colspan='2'>{% trans "Description" %}</th>
 </tr>
 <tr>
-    <td colspan='2'>{{ ticket.description|force_escape|urlizetrunc:50|linebreaksbr }}</td>
+    <td colspan='2' id="ticket-description">{{ ticket.description|force_escape|urlizetrunc:50|linebreaksbr }}</td>
 </tr>
 
 {% if ticket.resolution %}<tr>
@@ -53,6 +59,8 @@
 </tr>{% endif %}
 </tbody>
 </table>
+
+</div>
 
 {% if ticket.followup_set.public_followups %}
 <h3>{% trans "Follow-Ups" %}</h3>

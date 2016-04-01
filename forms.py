@@ -378,7 +378,7 @@ class PublicTicketForm(CustomFieldMixin, forms.Form):
     
     def clean_due_date(self):
         date = self.cleaned_data['due_date']
-        if date < timezone.now() + timedelta(days = 13):
+        if date==None or date < timezone.now() + timedelta(days = 13):
             raise forms.ValidationError("Please provide alternate date no earlier than {0}".format(timezone.now() + timedelta(days = 14)))
         return date
     

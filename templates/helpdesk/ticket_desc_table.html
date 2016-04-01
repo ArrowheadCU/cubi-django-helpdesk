@@ -1,21 +1,25 @@
 {% load i18n humanize %}
 {% load static from staticfiles %}
 {% load url_target_blank %}
+
+<div class="panel panel-info helpdesk">
+
+<div class="panel-heading helpdesk">
+<h3>{{ ticket.id }}. {{ ticket.title }} [{{ ticket.get_status }}]</h3>
+<span class='ticket_toolbar'>   
+			<a href='{% url 'helpdesk_edit' ticket.id %}' class="ticket-edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a> &nbsp
+    			<a href='{% url 'helpdesk_delete' ticket.id %}' class="ticket-delete"><span class="glyphicon glyphicon-remove"></span> Delete</a> &nbsp
+     			{% if ticket.on_hold %}<a href='{% url 'helpdesk_unhold' ticket.id %}' class="ticket-hold"><span class="glyphicon glyphicon-pushpin"></span>{% trans " Unhold" %}</a>
+			{% else %} <a href='{% url 'helpdesk_hold' ticket.id %}' class="ticket-hold"><span class="glyphicon glyphicon-pushpin"></span>{% trans " Hold" %}</a>{% endif %}
+    		</span>
+</div>
+
+
 <table class="table table-hover table-bordered table-striped">
 <thead>
-    <tr class='row_tablehead'><td colspan='2'><h3>{{ ticket.id }}. {{ ticket.title }} [{{ ticket.get_status }}]</h3> <span class='ticket_toolbar'>
-        <a href='{% url 'helpdesk_edit' ticket.id %}' class="ticket-edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-    | <a href='{% url 'helpdesk_delete' ticket.id %}' class="ticket-delete"><span class="glyphicon glyphicon-remove"></span> Delete</a>
-    {% if ticket.on_hold %} | <a href='{% url 'helpdesk_unhold' ticket.id %}' class="ticket-hold">{% trans "Unhold" %}</a>{% else %} | <a href='{% url 'helpdesk_hold' ticket.id %}' class="ticket-hold">{% trans "Hold" %}</a>{% endif %}
-    </span></td></tr>
-<tr><th colspan='2'>{% blocktrans with ticket.queue as queue %}Queue: {{ queue }}{% endblocktrans %}</th></tr>
+	<tr><th colspan='2'>{% blocktrans with ticket.queue as queue %}Queue: {{ queue }}{% endblocktrans %}</th></tr>
 </thead>
 <tbody>
-{% for customfield in ticket.ticketcustomfieldvalue_set.all %}
-<tr>
-    <th>{{ customfield.field.label }}</th>
-    <td>{% ifequal customfield.field.data_type "url" %}<a href='{{ customfield.value }}'>{{ customfield.value }}</a>{% else %}{{ customfield.value }}{% endifequal %}</td>
-</tr>{% endfor %}
 
 <tr>
     <th colspan='2'>{% trans "Description" %}</th>
@@ -32,7 +36,12 @@
 </tr>{% endif %}
 <tr>
     <th>{% trans "Submitted On" %}</th>
-    <td>{{ ticket.created|date:"r" }} ({{ ticket.created|naturaltime }})</td>
+    <td>{{ ticket.created|date }} {{ ticket.created|time }} ({{ ticket.created|naturaltime }})</td>
+</tr>
+
+<tr>
+    <th>{% trans "Due" %}</th>
+    <td>{{ ticket.due_date|date }} ({{ ticket.due_date|naturaltime }})</td>
 </tr>
 
 <tr>
@@ -49,6 +58,11 @@
     <th>{% trans "Priority" %}</th>
     <td>{{ ticket.get_priority_display }}</td>
 </tr>
+{% for customfield in ticket.ticketcustomfieldvalue_set.all %}
+<tr>
+    <th>{{ customfield.field.label }}</th>
+    <td>{% ifequal customfield.field.data_type "url" %}<a href='{{ customfield.value }}'>{{ customfield.value }}</a>{% else %}{{ customfield.value }}{% endifequal %}</td>
+</tr>{% endfor %}
 
 <tr>
     <th>{% trans "Copies To" %}</th>
@@ -70,3 +84,5 @@
 
 </tbody>
 </table>
+
+</div>

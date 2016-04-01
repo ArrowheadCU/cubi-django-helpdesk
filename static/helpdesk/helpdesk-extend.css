@@ -29,7 +29,13 @@ Bootstrap overrides
 
 #searchtabs {margin-bottom: 20px;}
 
-.row_tablehead, table.table caption {background-color: #dbd5d9;}
+.row_tablehead, table.table caption, .row_tablehead a {
+	background-color: #428bca;
+	background-border: #428bca;
+	color: white;
+	font-weight: bold;
+}
+
 table.table caption {height: 2em; line-height: 2em; font-weight: bold;}
 table.ticket-stats caption {color: #fbff00; font-style: italic;}
 table.ticket-stats tbody th, table.ticket-stats tbody tr {padding-left: 20px}
@@ -41,7 +47,10 @@ table.ticket-stats tbody th, table.ticket-stats tbody tr {padding-left: 20px}
 #helpdesk-nav-collapse #searchform {
     padding-top: 0;
 }
-#ticket-description {background-color: #FCF8E3;}
+#ticket-description {
+	background-color: #f4f5ff;
+	text-align: center;
+}
 .followup.well {background-color: #f4f5ff;}
 /*
 Add your custom styles here
@@ -53,3 +62,95 @@ Add your custom styles here
 }
 #helpdesk-body {padding-top: 100px;}
 img.brand {padding-right: 30px;}
+
+.panel-default>.panel-heading.helpdesk-panel-heading{
+	background-color: #428BCA;
+	
+}
+
+.btn.helpdesk-collapser {
+width:100%; 
+font-weight:bold;
+color: white;
+//background-color: #428bca;
+//border-color: #357ebd;
+font-size: 16px
+}
+
+
+.btn.helpdesk-collapser.no-border {
+border-color: white;
+
+}
+
+.btn.btn-primary.helpdesk-button {
+	background-color: #5cb85c;
+	border-color: #5cb85c;
+}
+
+
+
+/* Custom base navigation styling */
+.navbar.navbar-default.navbar-fixed-top {
+	background-color: rgba(0,0,0, 0.65);
+	border-color: rgba(0,0,0, 0.65);
+
+}
+
+ul.dropdown-menu.navigation {
+	background-color: rgb(89,89,89);
+	border-color: rgb(89,89,89);
+}
+
+ul.nav.navbar-nav li a, .navbar-default .navbar-nav>.dropdown>a b.caret {
+	color: white;
+	border-top-color: white;
+	border-bottom-color: white;
+
+}
+
+li .divider.black {
+	background-color: rgb(89,89,89);
+
+}
+
+
+#header h1{
+	color: #428bca;
+}
+
+#body>h2{
+	color: #5cb85c;
+}
+
+.panel-success.helpdesk {
+	border-color:#5cb85c;
+	
+}
+.panel-success> .panel-heading.helpdesk {
+	background-color: #5cb85c;
+	border-color: #5cb85c;
+	color: white;
+	//text-align: center;
+	
+}
+
+
+.panel-info.helpdesk {
+	border-color:#428bca;
+	
+}
+
+
+.panel-info> .panel-heading.helpdesk, .ticket_toolbar> a  {
+	background-color: #428bca;
+	border-color: #428bca;
+	color: white;
+	text-align: center;
+	
+}
+
+.btn-group.btn-group-justified > .btn {
+	padding: 0;
+
+}

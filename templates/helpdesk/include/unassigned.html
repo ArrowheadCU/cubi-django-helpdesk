@@ -1,7 +1,7 @@
 {% load i18n humanize %}
 
 <!-- Add collapse functionality from bootstrap js library -->
-<a class="btn btn-primary" style = "width:100%; font-weight:bold;" role="button" data-toggle="collapse" href="#collapseUnassigned" aria-expanded="false" aria-controls="collapseUnassigned">
+<a class="btn btn-primary helpdesk-collapser no-border" role="button" data-toggle="collapse" href="#collapseUnassigned" aria-expanded="false" aria-controls="collapseUnassigned">
 
 {% trans "Unassigned Tickets" %}
 
@@ -9,7 +9,7 @@
 
 <div class="collapse" id="collapseUnassigned">
 
-<table class="table table-hover table-bordered table-striped">
+<table class="table table-hover table-condensed table-striped">
 <thead>
 <tr><th>#</th><th>{% trans "Pr" %}</th><th>{% trans "Title" %}</th><th>{% trans "Queue" %}</th><th>{% trans "Created" %}</th><th>{% trans "Due" %}</th><th>&nbsp;</th></tr>
 </thead>

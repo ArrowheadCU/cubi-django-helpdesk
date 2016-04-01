@@ -27,10 +27,11 @@
 
 {% if helpdesk_settings.HELPDESK_SUBMIT_A_TICKET_PUBLIC %}
 <div class="col-xs-6">
-<div class="panel panel-default">
-
+<div class="panel panel-success helpdesk">
+<div class="panel-heading helpdesk">
+	<h2 name='submit'>{% trans "Submit a Ticket" %}</h2>
+</div>
 <div class="panel-body">
-    <h2 name='submit'>{% trans "Submit a Ticket" %}</h2>
 <p>{% trans "All fields are required." %} {% trans "Please provide as descriptive a title and description as possible." %}</p>
 
 <form role="form" method='post' action='./#submit' enctype='multipart/form-data'>
@@ -57,7 +58,7 @@
         {% endcomment %}
 
     <div class='buttons form-group'>
-        <input type='submit' class="btn btn-primary" value='{% trans "Submit Ticket" %}' />
+        <input type='submit' class="btn btn-success" value='{% trans "Submit Ticket" %}' />
     </div>
 </fieldset>
 
@@ -73,10 +74,12 @@
 
 {% if helpdesk_settings.HELPDESK_VIEW_A_TICKET_PUBLIC %}
 <div class="col-xs-6">
-<div class="panel panel-default">
-<div class="panel-body">
+<div class="panel panel-success helpdesk">
+<div class="panel-heading helpdesk">
 <h2>{% trans "View a Ticket" %}</h2>
+</div>
 
+<div class="panel-body">
 <form method='get' action="{% url 'helpdesk_public_view' %}">
 <fieldset>
     <div class="form-group {% if field.errors %}has-error{% endif %}">
@@ -88,7 +91,7 @@
         <div class="input-group"><input type='text' name='email' /></div>
     </div>
     <div class='buttons form-group'>
-    <input type='submit' class="btn btn-primary"  value='{% trans "View Ticket" %}' />
+    <input type='submit' class="btn btn-success"  value='{% trans "View Ticket" %}' />
     </div>
 </fieldset>
 {% csrf_token %}</form>
