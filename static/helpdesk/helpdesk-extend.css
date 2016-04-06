@@ -102,12 +102,21 @@ ul.dropdown-menu.navigation {
 	border-color: rgb(89,89,89);
 }
 
+/* Custom navbar link item styling */
 ul.nav.navbar-nav li a, .navbar-default .navbar-nav>.dropdown>a b.caret {
 	color: white;
 	border-top-color: white;
 	border-bottom-color: white;
 
 }
+
+ul.nav.navbar-nav li a:hover, ul.nav.navbar-nav li a:focus, .navbar-default .navbar-nav>.dropdown>a:focus b.caret, .navbar-default .navbar-nav>.dropdown>a:hover b.caret, ul.nav.navbar-nav>.open>a.dropdown-toggle  {
+	color: #5cb85c;
+	border-top-color: #5cb85c;
+	border-bottom-color: #5cb85c;
+
+}
+
 
 li .divider.black {
 	background-color: rgb(89,89,89);

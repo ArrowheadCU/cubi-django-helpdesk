@@ -11,14 +11,12 @@
             $("#ShowFurtherOptPara").hide();
             return false;
         });
-
         processAddFileClick();
         $("#ShowFileUpload").click(function() {
             $("#FileUpload").fadeIn();
             $("#ShowFileUploadPara").hide();
             return false;
         });
-
         $('#id_preset').change(function() {
             preset = $('#id_preset').val();
             if (preset != '') {
@@ -27,10 +25,8 @@
                 });
             }
         });
-
         $("[data-toggle=tooltip]").tooltip();
     });
-
     function processAddFileClick() {
         /* Until jQuery includes some 'livequery' functionality in the core
            distribution, this will have to do. */
@@ -40,9 +36,7 @@
             processAddFileClick();
             return false;
         });
-
-    });
-
+    }
 </script>
 {% endblock %}
 

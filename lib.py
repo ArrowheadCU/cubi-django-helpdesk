@@ -99,11 +99,15 @@ def send_templated_mail(template_name, email_context, recipients, sender=None, b
         template_func = engines['django'].from_string
     except ImportError:  # occurs in django < 1.8
         template_func = loader.get_template_from_string
-
+        
     text_part = template_func(
         "%s{%% include '%s' %%}" % (t.plain_text, footer_file)
         ).render(context)
-
+    
+    text_part_no_footer = template_func(
+        "%s" % (t.plain_text)
+        ).render(context)
+    
     email_html_base_file = os.path.join('helpdesk', locale, 'email_html_base.html')
 
 
@@ -138,12 +142,12 @@ def send_templated_mail(template_name, email_context, recipients, sender=None, b
             sendMail(   frm = sender
                         ,to = recipient
                         ,subject = subject_part.replace('\n', '').replace('\r', '')
-                        ,message = text_part)
+                        ,message = text_part_no_footer)
         else:
             sendMail(   frm = sender
                         ,to = recipient
                         ,subject = subject_part.replace('\n', '').replace('\r', '')
-                        ,message = text_part
+                        ,message = text_part_no_footer
                         ,attachment = files)
     #print("\n\n\n\n\n Email shouldve sent with sendMail( frm = {0} ,to = {1}, subject = {2}, message = {3} ,attachment = {4})\n\n\n\n\n". format(sender, recipients, subject_part.replace('\n', '').replace('\r', ''), text_part, files))
     #print("All function parameterstemplate_name, email_context, recipients, sender=None, bcc=None, fail_silently=False, files=None",'\n', template_name, '\n', email_context, '\n',  recipients,'\n', sender, '\n', bcc, '\n', fail_silently, '\n', files, '\n',)
