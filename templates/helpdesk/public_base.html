@@ -4,18 +4,63 @@
 {% with request|load_helpdesk_settings as helpdesk_settings %}
 <html>
 <head>
-<title>{% block helpdesk_title %}{% trans "CUBI Helpdesk" %}{% endblock %}</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
-<link rel='stylesheet' href='{% static "helpdesk/helpdesk-extend.css" %}' type='text/css' />
+<title>{% block helpdesk_title %}{% trans "CUBI Curiosity" %}{% endblock %}</title>
 
+ <meta http-equiv="content-type" content="text/html; charset=UTF8">
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src='{% static "helpdesk/jquery-ui-1.8.9.custom.min.js" %}' type='text/javascript' language='javascript'></script>
+        <link rel='stylesheet' href='{% static "helpdesk/helpdesk-extend.css" %}' type='text/css'  media="screen" >
+
+        <!--link rel='stylesheet' href='{% static "helpdesk/helpdesk-print.css" %}' type='text/css' media="print" /-->
+        <!--link rel='stylesheet' href='{% static "helpdesk/jquery-smoothness-theme/jquery-ui-1.8.9.custom.css" %}' type='text/css' /-->
+        <!--Old bootstrap 
+	    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+	   -->
+
+	   
+	   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+	  
+
+        <style type="text/css">
+        /* hide google translate top bar */
+        .goog-te-banner-frame {display: none !important;}
+        .goog-te-balloon-frame {display: none !important;}
+        /* hide google translate tooltips (generated for every translated item) */
+        .goog-tooltip {display: none !important; }
+        </style>
+
+        <style type="text/css">
+        /* header */
+        #dropdown li.headerlink { width: auto; float: left; text-align: center; }
+
+        /* query list */
+        #dropdown li.headerlink ul {    display: none;
+                                        text-align: left;
+                                        position: absolute;
+                                        padding: 5px;
+                                        z-index: 2; }
+        /* query entries */
+        #dropdown li.headerlink:hover ul { display: block; width: auto; }
+        #dropdown li.headerlink:hover ul li { padding: 5px; margin: 1px; float: none; display: block; }
+        
+	   </style>
+  
 	<!-- Javascript for datepicker to resolve IE and FF non-HTML 5 support of input_type = 'date' --> 
 	  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	  <!--<link href="css/jquery.datepicker.css" rel="stylesheet"> -->
 	  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	  <script src='{% static "helpdesk/custom.js" %}' type='text/javascript' language='javascript'></script>
-{% block helpdesk_head %}{% endblock %}
+
+        {% block helpdesk_head %}{% endblock %}
+
+
+
 </head>
 
 <body id="helpdesk-body">
@@ -23,14 +68,14 @@
     <div id='header' class="row">
         <!-- Put your logo here if necessary: -->
         <img class="brand pull-right" src="{% static  '/static/logo.jpg' %}" height="70px" width ="300px"/>
-        <h1>{% trans "Helpdesk" %}</h1>
+        <h1>{% trans "Curiosity" %}</h1>
         {% include "helpdesk/navigation.html" %}
     </div>
     <div id='body' class="row">
 {% block helpdesk_body %}{% endblock %}
     </div>
     <div id='footer' class="row">
-        <p>{% include "helpdesk/attribution.html" %}</p>
+        <!--<p>{% include "helpdesk/attribution.html" %}</p> -->
     </div>
 </div>{% include "helpdesk/debug.html" %}
 </body>

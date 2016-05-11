@@ -4,7 +4,7 @@
 <a class="btn btn-primary helpdesk-collapser no-border" style = "width:100%; font-weight:bold;" role="button" data-toggle="collapse" href="#collapseTicket{{ caption_number }}" aria-expanded="false" aria-controls="collapseTicket{{ caption_number }}">
 
 {% if ticket_list_caption %}
-{{ ticket_list_caption }}
+{{ ticket_list_caption }} {% if caption_number == "two" %} <span class = 'badge'> {{ user_tickets_count}} </span>{%endif%}
 {% endif %}
 
 </a>

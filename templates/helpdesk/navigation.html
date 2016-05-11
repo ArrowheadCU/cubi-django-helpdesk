@@ -1,6 +1,7 @@
 {% load i18n %}
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" id = 'bg-transparent' role="navigation">
+<div class = 'container-fluid'>
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#helpdesk-nav-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -44,8 +45,8 @@
                 </li>
             </ul>
 
-            {% if not query %}
-                    <form class="navbar-form navbar-left" id='searchform' method='get' action="{% url 'helpdesk_list' %}">
+            {% if not query %} 
+                    <form class="navbar-form navbar-right" id='searchform' method='get' action="{% url 'helpdesk_list' %}">
                         <div class="input-group">
                             <input type='text' name='q' size='15' class='input form-control' placeholder='{% trans "Search..." %}' id='search_query' title='{% trans "Enter a keyword, or a ticket number to jump straight to that ticket." %}'/>
                             <input type='hidden' name='status' value='1' /><input type='hidden' name='status' value='2' /><input type='hidden' name='status' value='3' />
@@ -75,4 +76,6 @@
             </ul>
         {% endif %}
     </div>
+</div>
 </nav>
+

@@ -153,9 +153,12 @@ def dashboard(request):
     return render_to_response('helpdesk/dashboard.html',
         RequestContext(request, {
             'user_tickets': tickets,
+            'user_tickets_count': tickets.count(),
             'user_tickets_closed_resolved': tickets_closed_resolved,
             'unassigned_tickets': unassigned_tickets,
+            'unassigned_tickets_count': unassigned_tickets.count(),
             'all_tickets_reported_by_current_user': all_tickets_reported_by_current_user,
+            'all_tickets_reported_by_current_user_count': all_tickets_reported_by_current_user.count(),
             'dash_tickets': dash_tickets,
             'basic_ticket_stats': basic_ticket_stats,
         }))
