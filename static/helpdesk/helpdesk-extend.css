@@ -1,6 +1,18 @@
-/*
+/******
+Data Tables
+*******/
+
+td.highlight, th.highlight {
+    background-color: whitesmoke !important;
+}
+
+div.dataTables_wrapper {
+        margin-bottom: 1em;
+    }
+
+/******
 Bootstrap overrides
-*/
+******/
 
 .thumbnail.filterBox {
     display: none;
